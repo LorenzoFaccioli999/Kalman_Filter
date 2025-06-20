@@ -94,8 +94,10 @@ cmake --build .
 ---
 
 ## 💡 Notes
+
 - Make sure the correct compiler and triplet (`x64-mingw-static` or `x64-windows`) match your system.
+- The `VCPKG_ROOT` environment variable should point to the root directory of your [vcpkg](https://github.com/microsoft/vcpkg) installation
+
 - If you're on Windows, launch from a terminal where `vcpkg` and your compiler are available in `PATH`.
 
----
  
