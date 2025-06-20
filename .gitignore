@@ -1,0 +1,12 @@
+# Ignore build directory inside cpp/
+cpp/build/
+
+# Ignore Python bytecode caches
+__pycache__/
+**/__pycache__/
+
+# Ignore virtual environment inside python/
+python/.venv/
+
+# Ignore external libraries
+cpp/external/
