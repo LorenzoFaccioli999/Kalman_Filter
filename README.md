@@ -12,7 +12,6 @@ This repository demonstrates the use of **Kalman filters** in both simulated and
 - 📉 Recursive Least Squares (RLS) Kalman filter implementation
 - 📊 Real-time visualization using **ImGui + ImPlot**
 - 🎛️ Interactive measurement noise tuning (`R`) via GUI slider
-- 📈 Auto-scrolling plot window for a live view of filtering
 - 🧪 Modular, testable C++ design
 
 ---
@@ -74,14 +73,12 @@ From the project root (`Kalman_Filter/`), run:
 mkdir build
 cd build
 
-cmake ../cpp `
+cmake .. `
   -DCMAKE_TOOLCHAIN_FILE=$env:VCPKG_ROOT/scripts/buildsystems/vcpkg.cmake `
   -DVCPKG_TARGET_TRIPLET=x64-mingw-static
 
 cmake --build .
 ```
-
----
 
 ## 🚀 Running the Application
 
