@@ -10,3 +10,6 @@ python/.venv/
 
 # Ignore external libraries
 cpp/external/
+
+# Ignore vscode workspace settings
+.vscode/
