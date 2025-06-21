@@ -1,5 +1,7 @@
 # 📦 Kalman Filter Project (C++ & Python)
 
+![kalman_estimation](images/kalman_RLS_estimation.png)
+
 This repository demonstrates the use of **Kalman filters** in both simulated and real-time contexts, using:
 
 - ✅ **C++** for real-time, interactive applications (with ImGui + ImPlot)
