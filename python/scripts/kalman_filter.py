@@ -14,6 +14,7 @@ class KalmanFilter:
     def compute_discrete_matrices(self, T):
         """
         Computes the discrete-time state transition matrices based on the sampling time T.
+        For LTI systems, this matrices are constant and can be computed once.
         """
         self.Phi = expm(self.A * T)
         self.Gamma = np.linalg.inv(self.A) @ (self.Phi - np.eye(self.A.shape[0])) @ self.B
