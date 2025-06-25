@@ -1,21 +1,20 @@
-
 # 📦 Kalman Filter Project (C++ & Python)
 
 ![kalman_estimation](images/kalman_RLS_estimation.png)
 
-This repository demonstrates the use of **Kalman filters** in both simulated and real-time contexts, using:
+This repository demonstrates the use of **Kalman filters** for both simulation and real-time applications, with a focus on:
 
-- ✅ **C++** for real-time, interactive applications (with ImGui + ImPlot)
-- ✅ **Python** for didactic purposes and simulations
+- ✅ **C++** for high-performance simulation and CSV export
+- ✅ **Python** for didactic simulations, analysis, and plotting
 
 ---
 
 ## 🧠 Features
 
-- 📉 Recursive Least Squares (RLS) Kalman filter implementation
-- 📐 Discrete-Time Kalman Filter (DTKF) implementation
-- 📊 Real-time visualization using **ImGui + ImPlot**
-- 🎛️ Interactive measurement noise tuning (`R`) via GUI slider
+- 📐 Discrete-Time Kalman Filter (DTKF) 
+- 📉 Recursive Least Squares (RLS) Kalman filter 
+- 📊 Export of C++ simulation results to CSV for further analysis
+- 📈 Python utility script for plotting and comparing true, measured, and estimated states from CSV
 - 🧪 Modular, testable C++ design
 
 ---
@@ -44,9 +43,9 @@ vcpkg install glfw3:x64-mingw-static
 
 #### External Dependencies (imgui & implot)
 
-This project uses [Dear ImGui](https://github.com/ocornut/imgui) and [ImPlot](https://github.com/epezent/implot) for visualization.
+ImGui and ImPlot are included for future/optional real-time GUI visualization. They are not required for basic simulation and CSV export.
 
-Clone them manually into your C++ project folder:
+To enable GUI features, clone them manually into your C++ project folder:
 
 ```bash
 cd cpp
@@ -69,7 +68,7 @@ cpp/
 
 ### ✅ Python Dependencies
 
-To run the Python simulations:
+To run the Python simulations and plot C++ results:
 
 ```bash
 # Create and activate a virtual environment
@@ -81,13 +80,13 @@ venv\Scripts\activate.bat   # On Windows
 pip install -r requirements.txt
 ```
 
-This will allow you to run all the Jupyter notebooks and simulations included in the Python portion.
+This will allow you to run all the Jupyter notebooks, simulations, and the CSV plotting utility in `python/utils/plot_kalman_results.py`.
 
 ---
 
 ## 🛠️ Build Instructions
 
-### 🛠️ C++ 
+### 🛠️ C++
 
 From the project root (`Kalman_Filter/`), run:
 
@@ -107,16 +106,24 @@ cmake --build .
 
 ## 🚀 Running the Application
 
-### C++ Executable
+### C++ Simulation
 
 ```bash
-./main_sim_RLS.exe
+./kalman_sim.exe
 ```
 
-- Runs a live simulation of a Kalman filter (RLS variant)
-- Opens a GUI window with real-time plots
-- Lets you interactively tune the measurement noise `R`
-- Visualizes noisy measurements, filter estimates, and the true value
+- Runs a simulation of a discrete-time Kalman filter on a pendulum system
+- Saves results to `cpp/results/kalman_results.csv`
+
+### Python Plotting Utility
+
+After running the C++ simulation, plot the results with:
+
+```bash
+python python/utils/plot_kalman_results.py
+```
+
+- Visualizes true, measured, and estimated states from the CSV file
 
 ---
 
@@ -125,3 +132,4 @@ cmake --build .
 - Ensure that your compiler and vcpkg triplet (`x64-mingw-static` or `x64-windows`) match your system.
 - `VCPKG_ROOT` should point to the root of your vcpkg installation.
 - On Windows, run the C++ app from a terminal with `vcpkg` and your compiler in the `PATH`.
+- ImGui/ImPlot GUI features are optional and not required for CSV-based simulation and analysis.
