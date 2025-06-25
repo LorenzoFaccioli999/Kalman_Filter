@@ -4,7 +4,7 @@
 
 This repository demonstrates the use of **Kalman filters** for both simulation and real-time applications, with a focus on:
 
-- ✅ **C++** for high-performance simulation and CSV export
+- ✅ **C++** for high-performance simulation 
 - ✅ **Python** for didactic simulations, analysis, and plotting
 
 ---
