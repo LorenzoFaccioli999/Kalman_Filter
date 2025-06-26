@@ -11,8 +11,8 @@ This repository demonstrates the use of **Kalman filters** for both simulation a
 
 ## 🧠 Features
 
-- 📐 Discrete-Time Kalman Filter (DTKF) in C++ and Python
-- 📉 Recursive Least Squares (RLS) Kalman filter (Python only)
+- 📐 Discrete-Time Kalman Filter (DTKF) 
+- 📉 Recursive Least Squares (RLS) Kalman filter
 - 🖥️ Real-time C++ visualization with ImGui + ImPlot (`kalman_sim_gui`)
 - 📊 Export of C++ simulation results to CSV for further analysis
 - 📈 Python utility script for plotting and comparing true, measured, and estimated states from CSV
