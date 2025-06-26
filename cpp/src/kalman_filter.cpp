@@ -36,24 +36,14 @@ std::vector<double> KalmanFilter::recursive_least_square(const std::vector<doubl
     return x_estimates;
 }
 
-Eigen::MatrixXd KalmanFilter::discrete_time_filter(const Eigen::VectorXd& x0,
-                                                   const Eigen::MatrixXd& P0,
-                                                   const Eigen::MatrixXd& u_seq,
-                                                   const Eigen::MatrixXd& z) {
-    int N_steps = u_seq.cols();
-    int n = x0.size();
-    Eigen::MatrixXd X_hat(n, N_steps + 1);
-    X_hat.col(0) = x0;
-    Eigen::MatrixXd P = P0;
-    for (int k = 0; k < N_steps; ++k) {
-        // Prediction
-        X_hat.col(k + 1) = Phi * X_hat.col(k) + Gamma * u_seq.col(k);
-        P = Phi * P * Phi.transpose() + Lambda * Q * Lambda.transpose();
-        // Kalman gain
-        Eigen::MatrixXd K = P * C.transpose() * (C * P * C.transpose() + R).inverse();
-        // Correction
-        X_hat.col(k + 1) += K * (z.col(k) - C * X_hat.col(k + 1));
-        P = (Eigen::MatrixXd::Identity(n, n) - K * C) * P;
-    }
-    return X_hat;
+void KalmanFilter::predict(const Eigen::VectorXd& u) {
+    x_hat = Phi * x_hat + Gamma * u;
+    P = Phi * P * Phi.transpose() + Lambda * Q * Lambda.transpose();
 }
+
+void KalmanFilter::update(const Eigen::VectorXd& z) {
+    Eigen::MatrixXd K = P * C.transpose() * (C * P * C.transpose() + R).inverse();
+    x_hat = x_hat + K * (z - C * x_hat);
+    P = (Eigen::MatrixXd::Identity(P.rows(), P.cols()) - K * C) * P;
+}
+

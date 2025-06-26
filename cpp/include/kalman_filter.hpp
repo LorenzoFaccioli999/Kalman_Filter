@@ -16,14 +16,19 @@ public:
 
     std::vector<double> recursive_least_square(const std::vector<double>& zs, double x0, double P0);
 
-    Eigen::MatrixXd discrete_time_filter(const Eigen::VectorXd& x0,
-                                         const Eigen::MatrixXd& P0,
-                                         const Eigen::MatrixXd& u_seq,
-                                         const Eigen::MatrixXd& z);
+    // Step-by-step (real-time) Kalman filter API
+    void predict(const Eigen::VectorXd& u);
+    void update(const Eigen::VectorXd& z);
+
+    const Eigen::VectorXd& getState() const { return x_hat; }
+    const Eigen::MatrixXd& getCovariance() const { return P; }
+    void setState(const Eigen::VectorXd& x0, const Eigen::MatrixXd& P0) { x_hat = x0; P = P0; }
 
     // Matrices for discrete-time filter
     Eigen::MatrixXd Phi, Gamma, Lambda;
 
 private:
     Eigen::MatrixXd A, B, C, D, L, Q, R;
+    Eigen::VectorXd x_hat;
+    Eigen::MatrixXd P;
 };

@@ -62,8 +62,15 @@ int main() {
         u_seq_noisy(0, k) += noise_u(gen);
     }
 
-    // Kalman filter
-    Eigen::MatrixXd X_hat = kf.discrete_time_filter(x0, P0, u_seq_noisy, z.leftCols(N_steps));
+    // Kalman filter (real-time, step-by-step)
+    std::vector<Eigen::VectorXd> X_hat_hist;
+    kf.setState(x0, P0);
+    X_hat_hist.push_back(x0);
+    for (int k = 0; k < N_steps; ++k) {
+        kf.predict(u_seq_noisy.col(k));
+        kf.update(z.col(k));
+        X_hat_hist.push_back(kf.getState());
+    }
 
     // Get absolute path to results directory relative to source
     std::filesystem::path results_dir = std::filesystem::absolute("../results");
@@ -75,10 +82,7 @@ int main() {
         fout << k * T << ","
              << X_true(1, k) << "," << X_true(0, k) << ","
              << z(1, k) << "," << z(0, k) << ",";
-        if (k < X_hat.cols())
-            fout << X_hat(1, k) << "," << X_hat(0, k);
-        else
-            fout << ",";
+        fout << X_hat_hist[k](1) << "," << X_hat_hist[k](0);
         fout << "\n";
     }
     fout.close();

@@ -4,15 +4,16 @@
 
 This repository demonstrates the use of **Kalman filters** for both simulation and real-time applications, with a focus on:
 
-- ✅ **C++** for high-performance simulation 
+- ✅ **C++** for high-performance simulation and real-time GUI visualization (ImGui + ImPlot)
 - ✅ **Python** for didactic simulations, analysis, and plotting
 
 ---
 
 ## 🧠 Features
 
-- 📐 Discrete-Time Kalman Filter (DTKF) 
-- 📉 Recursive Least Squares (RLS) Kalman filter 
+- 📐 Discrete-Time Kalman Filter (DTKF) in C++ and Python
+- 📉 Recursive Least Squares (RLS) Kalman filter (Python only)
+- 🖥️ Real-time C++ visualization with ImGui + ImPlot (`kalman_sim_gui`)
 - 📊 Export of C++ simulation results to CSV for further analysis
 - 📈 Python utility script for plotting and comparing true, measured, and estimated states from CSV
 - 🧪 Modular, testable C++ design
@@ -43,9 +44,7 @@ vcpkg install glfw3:x64-mingw-static
 
 #### External Dependencies (imgui & implot)
 
-ImGui and ImPlot are included for future/optional real-time GUI visualization. They are not required for basic simulation and CSV export.
-
-To enable GUI features, clone them manually into your C++ project folder:
+ImGui and ImPlot are required for the real-time GUI simulation. Clone them manually into your C++ project folder:
 
 ```bash
 cd cpp
@@ -106,7 +105,7 @@ cmake --build .
 
 ## 🚀 Running the Application
 
-### C++ Simulation
+### C++ Simulation (CLI)
 
 ```bash
 ./kalman_sim.exe
@@ -114,6 +113,16 @@ cmake --build .
 
 - Runs a simulation of a discrete-time Kalman filter on a pendulum system
 - Saves results to `cpp/results/kalman_results.csv`
+
+### C++ Real-Time GUI Simulation
+
+```bash
+./kalman_sim_gui.exe
+```
+
+- Runs a real-time, interactive simulation of the Kalman filter
+- Visualizes true, measured, and estimated states with ImGui + ImPlot
+- Allows step-by-step, continuous, or resettable simulation
 
 ### Python Plotting Utility
 
@@ -132,4 +141,4 @@ python python/utils/plot_kalman_results.py
 - Ensure that your compiler and vcpkg triplet (`x64-mingw-static` or `x64-windows`) match your system.
 - `VCPKG_ROOT` should point to the root of your vcpkg installation.
 - On Windows, run the C++ app from a terminal with `vcpkg` and your compiler in the `PATH`.
-- ImGui/ImPlot GUI features are optional and not required for CSV-based simulation and analysis.
+- ImGui/ImPlot GUI features are now fully supported for real-time visualization.

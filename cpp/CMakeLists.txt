@@ -26,14 +26,30 @@ find_package(glfw3 REQUIRED)
 find_package(Eigen3 CONFIG REQUIRED)
 
 # ------------------------------------------------------------------------------
+# IMGUI + IMPLOT Integration
+# ------------------------------------------------------------------------------
+file(GLOB IMGUI_SOURCES
+    external/imgui/*.cpp
+    external/imgui/backends/imgui_impl_glfw.cpp
+    external/imgui/backends/imgui_impl_opengl3.cpp
+)
+
+file(GLOB IMPLOT_SOURCES
+    external/implot/*.cpp
+)
+
+# ------------------------------------------------------------------------------
 # Include Directories
 # ------------------------------------------------------------------------------
 include_directories(
     ${CMAKE_CURRENT_SOURCE_DIR}/include
+    external/imgui
+    external/imgui/backends
+    external/implot
 )
 
 # ------------------------------------------------------------------------------
-# Kalman_RLS Static Library
+# Kalman Filter Static Library
 # ------------------------------------------------------------------------------
 add_library(kalman_filter STATIC
     src/kalman_filter.cpp
@@ -43,13 +59,29 @@ target_include_directories(kalman_filter PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/incl
 target_link_libraries(kalman_filter PUBLIC Eigen3::Eigen)
 
 # ------------------------------------------------------------------------------
-# Executable: main_sim_RLS
+# Executable: kalman_sim
 # ------------------------------------------------------------------------------
 add_executable(kalman_sim
     kalman_sim.cpp
 )
 
 target_link_libraries(kalman_sim
+    PRIVATE
+    OpenGL::GL
+    glfw
+    kalman_filter
+)
+
+# ------------------------------------------------------------------------------
+# Executable: kalman_sim_gui (with ImGui/ImPlot visualization)
+# ------------------------------------------------------------------------------
+add_executable(kalman_sim_gui
+    kalman_sim_gui.cpp
+    ${IMGUI_SOURCES}
+    ${IMPLOT_SOURCES}
+)
+
+target_link_libraries(kalman_sim_gui
     PRIVATE
     OpenGL::GL
     glfw
