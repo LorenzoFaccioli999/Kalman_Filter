@@ -83,6 +83,7 @@ This will allow you to run all the Jupyter notebooks, simulations, and the CSV p
 From the project root (`Kalman_Filter/`), run:
 
 ```bash
+cd cpp
 mkdir build
 cd build
 
