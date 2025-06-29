@@ -1,6 +1,8 @@
 # 📦 Kalman Filter Project (C++ & Python)
 
-![kalman_estimation](images/kalman_RLS_estimation.png)
+![dynamical_system](images/pendulum_dynamics.png)
+![theta_estimate](images/theta_estimate.png)
+![theta_dot_estimate](images/theta_dot_estimate.png)
 
 This repository demonstrates the use of **Kalman filters** for both simulation and real-time applications, with a focus on:
 
