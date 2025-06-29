@@ -33,15 +33,6 @@ This repository demonstrates the use of **Kalman filters** for both simulation a
 
 Make sure `vcpkg` is installed and its root is in your environment variable `VCPKG_ROOT`.
 
-Install the required libraries:
-
-```bash
-vcpkg install eigen3:x64-mingw-static
-vcpkg install glfw3:x64-mingw-static
-```
-
-> If you're using MSVC instead of MinGW, replace `x64-mingw-static` with `x64-windows`.
-
 #### External Dependencies (imgui & implot)
 
 ImGui and ImPlot are required for the real-time GUI simulation. Clone them manually into your C++ project folder:
